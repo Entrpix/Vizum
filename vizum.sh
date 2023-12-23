@@ -1,16 +1,29 @@
-# Vizum is a simple CLI tool that uses Git for a free CDN (if you host it on a serivce like Github)
-
 # Configuration
 config_dir="/home/$USER/.config/vizum"
 config_file="$config_dir/path.cfg"
 
 # Help Message
 help() {
-    echo "vizum.sh init <folder path> <git repo> - Will store files in the provided folder path and push them to the provided Git repo."
-    echo "vizum.sh add <file path> (-f) - Copy and pastes the provided file path into the Vizum local repo and the remote repo. (-f will force push)"
-    echo "vizum.sh remove <file> - Removes the provided file from the local repo and the remote repo."
-    echo "vizum.sh sync - Syncs changes made from the remote Git repo to the local repo."
-    echo "vizum.sh help - Displays a help message."
+    echo "Vizum - A simple shell script for managing files with Git"
+    echo ""
+    echo "Usage:"
+    echo "  vizum.sh <command> [<args>]"
+    echo ""
+    echo "Available commands:"
+    echo "  init <folder path> <git repo> - Initialize Vizum with a folder path and a Git repo."
+    echo "  add <file path> [-mv] [-l|-r] - Add a file to the Vizum local and/or remote repo."
+    echo "                                 Use -mv to move instead of copy. Use -l for local only, -r for remote only."
+    echo "  remove <file> [-l|-r] - Remove a file from the Vizum local and/or remote repo."
+    echo "                          Use -l for local only, -r for remote only."
+    echo "  sync [-l|-r] - Sync changes between the local and remote repo."
+    echo "                 Use -l to push local changes to remote, -r to pull remote changes to local."
+    echo "  help - Display this help message."
+    echo ""
+    echo "Flags:"
+    echo "  -mv - Move a file instead of copying it."
+    echo "  -l - Perform action on local repo only."
+    echo "  -r - Perform action on remote repo only."
+    echo "  -f - Force push to remote repo. Use with caution."
 }
 
 # Checks if Git is installed
@@ -29,7 +42,15 @@ fi
 ## Sync Command
 if [ "$1" == "sync" ]; then
     cd "$repo"
-    git pull
+    if [ "$2" == "-l" ]; then
+        git add *
+        git commit -m "Sycned all changes from local repo to remote repo."
+        git push origin main
+    elif [ "$2" == "-r" ]; then
+        git pull
+    else
+        echo "Invalid flag. Use -l to sync local changes to remote or -r to sync remote changes to local."
+    fi
     exit
 fi
 
@@ -53,15 +74,22 @@ fi
 repo=$(cat "$config_file")
 
 ## Add Command
-
 if [ "$1" == "add" ]; then
-    cp "$2" "$repo"
-
     cd "$repo"
+    if [ "$3" == "-mv" ]; then
+        mv "$2" "$repo"
+    else
+        cp "$2" "$repo"
+    fi
+
     git add "$2"
     git commit -m "Added file $2"
 
-    if [ "$3" == "-f" ]; then
+    if [ "$4" == "-l" ]; then
+        echo "Changes made to local repo only."
+    elif [ "$4" == "-r" ]; then
+        git push -u origin main
+    elif [ "$4" == "-f" ]; then
         echo "Are you sure you want to force push, this will overwrite the remote repo? (y/n)"
         read answer
         if [ "$answer" == "y" ]; then
@@ -79,14 +107,26 @@ fi
 if [ "$1" == "remove" ]; then
     cd "$repo"
     if [ -f "$2" ]; then
-        rm -rf "$2"
-    else
-        echo "File does not exist."
-        exit
-    fi
+        git rm "$2"
+        git commit -m "Removed file $2"
 
-    cd "$repo"
-    git rm "$2"
-    git commit -m "Removed file $2"
-    git push origin main
+        if [ "$3" == "-l" ]; then
+            echo "Changes made to local repo only."
+        elif [ "$3" == "-r" ]; then
+            if [ "$4" == "-f" ]; then
+                echo "Are you sure you want to force push, this will overwrite the remote repo? (y/n)"
+                read answer
+                if [ "$answer" == "y" ]; then
+                    git push -f -u origin main
+                else
+                    echo "Aborted."
+                    exit
+                fi
+            else
+                git push -u origin main
+            fi
+        else
+            git push -u origin main
+        fi
+    fi
 fi
