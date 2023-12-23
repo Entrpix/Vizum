@@ -3,7 +3,6 @@
 # Configuration
 config_dir="/home/$USER/.config/vizum"
 config_file="$config_dir/path.cfg"
-repo=$(cat "$config_file")
 
 # Help Message
 help() {
@@ -51,7 +50,10 @@ if [ "$1" == "init" ]; then
     echo "$2" > "$config_file"
 fi
 
+repo=$(cat "$config_file")
+
 ## Add Command
+
 if [ "$1" == "add" ]; then
     cp "$2" "$repo"
 
