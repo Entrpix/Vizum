@@ -2,7 +2,7 @@
 Simple CLI tool that uses Git for a free CDN 
 
 ## TODO
-- [ ] Help Command
+- [X] Help Command
 - [ ] Add Command
 - [ ] Custom Commit Message
 - [ ] Remove Command
