@@ -3,10 +3,10 @@ Simple CLI tool that uses Git for a free CDN
 
 ## TODO
 - [X] Help Command
-- [ ] Add Command
+- [X] Add Command
 - [ ] Custom Commit Message
 - [ ] Remove Command
-- [ ] Init Command
+- [X] Init Command
 - [X] Sync Command
 - [ ] Installation / Setup Script
 - [ ] Embed Genorator
