@@ -2,11 +2,7 @@
 Simple CLI tool that uses Git for a free CDN 
 
 ## Commands
-- `vizum.sh init <folder path> <git repo>`: Stores files in the provided folder path and pushes them to the provided Git repo.
-- `vizum.sh add <file path> (-f)`: Copies and pastes the provided file path into the Vizum local repo and the remote repo. Use `-f` to force push.
-- `vizum.sh remove <file>`: Removes the provided file from the local repo and the remote repo.
-- `vizum.sh sync`: Syncs changes made from the remote Git repo to the local repo.
-- `vizum.sh help`: Displays a help message.
+Run `vizum help`
 
 ## TODO
 - [X] Help Command
