@@ -1,25 +1,26 @@
 # Vizum
 Simple CLI tool that uses Git for a free CDN 
 
+## Commands
+- `vizum.sh init <folder path> <git repo>`: Stores files in the provided folder path and pushes them to the provided Git repo.
+- `vizum.sh add <file path> (-f)`: Copies and pastes the provided file path into the Vizum local repo and the remote repo. Use `-f` to force push.
+- `vizum.sh remove <file>`: Removes the provided file from the local repo and the remote repo.
+- `vizum.sh sync`: Syncs changes made from the remote Git repo to the local repo.
+- `vizum.sh help`: Displays a help message.
+
 ## TODO
 - [X] Help Command
 - [X] Add Command
-- [ ] Custom Commit Message
-- [ ] Remove Command
+- [X] Remove Command
 - [X] Init Command
 - [X] Sync Command
-- [ ] Installation / Setup Script
+- [X] Installation Script
 - [ ] Embed Genorator
 
-## Requirements
-*Should* work on any OS (that has Bash) as long as you have the Git CLI installed
-
 ## Installation
+Requirements - Git, Bash, Curl
 ```sh
-$ git clone https://github.com/entrpix/vizum
-$ cd vizum
-$ chmod +x ./vizum.sh
-$ ./vizum <file path> [git repo]
+$ sudo curl https://entrpix.me/install.sh | bash
 ```
 
 ## My Vizum Repo
