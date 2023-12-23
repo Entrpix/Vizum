@@ -7,7 +7,7 @@ Simple CLI tool that uses Git for a free CDN
 - [ ] Custom Commit Message
 - [ ] Remove Command
 - [ ] Init Command
-- [ ] Sync Command
+- [X] Sync Command
 - [ ] Installation / Setup Script
 - [ ] Embed Genorator
 
