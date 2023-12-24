@@ -12,7 +12,7 @@ I have come across a common issue when setuping up Vizum & Git so I'll leave thi
 - `error: failed to push some refs to 'https://github.com/entrpix/vizum-cdn.git'`
   - `git add *File Name Here*`
   - `git commit -m "Commit Message Here"`
-  - `git push -u origin main -f`
+  - `git push -u origin main -f`\
 Should fix any Git issues when initially setting Vizum and Git
 
 ## Commands
