@@ -75,12 +75,13 @@ repo=$(cat "$config_file")
 
 ## Add Command
 if [ "$1" == "add" ]; then
-    cd "$repo"
     if [ "$3" == "-mv" ]; then
         mv "$2" "$repo"
     else
         cp "$2" "$repo"
     fi
+
+    cd "$repo"
 
     git add "$2"
     git commit -m "Added file $2"
@@ -114,7 +115,7 @@ if [ "$1" == "remove" ]; then
             echo "Changes made to local repo only."
         elif [ "$3" == "-r" ]; then
             if [ "$4" == "-f" ]; then
-                echo "Are you sure you want to force push, this will overwrite the remote repo? (y/n)"
+               echo "Are you sure you want to force push, this will overwrite the remote repo? (y/n)"
                 read answer
                 if [ "$answer" == "y" ]; then
                     git push -f -u origin main
