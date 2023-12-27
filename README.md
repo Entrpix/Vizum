@@ -4,7 +4,7 @@ Simple CLI tool that uses Git for a free CDN
 ## Installation
 Requirements - Git, Bash, Curl
 ```sh
-$ sudo curl https://entrpix.me/install.sh | bash
+$ sudo curl https://entrpix.me/vizum/install.sh | bash
 ```
 
 ## Common Isuse
