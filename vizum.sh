@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Configuration
 config_dir="/home/$USER/.config/vizum"
 config_file="$config_dir/path.cfg"
