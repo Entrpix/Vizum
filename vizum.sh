@@ -4,10 +4,10 @@ config_file="$config_dir/path.cfg"
 
 # Help Message
 help() {
-    echo "Vizum - A simple shell script for managing files with Git"
+    echo "Vizum - A simple CLI for Managing Files with Git"
     echo ""
     echo "Usage:"
-    echo "  vizum.sh <command> [<args>]"
+    echo "  vizum <command> [<args>]"
     echo ""
     echo "Available commands:"
     echo "  init <folder path> <git repo> - Initialize Vizum with a folder path and a Git repo."
